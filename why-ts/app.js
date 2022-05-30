@@ -46,4 +46,3 @@ function startApp() {
 }
 
 startApp();
-//test
