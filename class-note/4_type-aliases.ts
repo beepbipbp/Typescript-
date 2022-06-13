@@ -1,5 +1,3 @@
-// @ts-ignore
-
 interface Person1 {
     name: string;
     age: number

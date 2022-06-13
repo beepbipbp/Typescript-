@@ -27,3 +27,52 @@ const str = getLog<string>("hi"); // 이 때 str의 타입은 string이다
 // }
 // const a = getLog("hi");
 // a. // 마찬가지로 getLog 함수의 결과값도 string과 number 타입 모두에서 사용 가능한 메소드만 쓸 수 있다.
+
+// 인터페이스에 제네릭 선언하기
+interface DropDown<T> {
+    value: T;
+    selected: boolean;
+}
+
+const dropdown1: DropDown<string> = {
+    value: "abc",
+    selected: false
+}
+
+// 제네릭 타입 제한
+function logTextLength<T>(text: T[]): T[]{
+    console.log(text.length);
+    text.forEach(v => console.log(v));
+    return text;
+}
+
+logTextLength<string>(["hi", "abc"]);
+
+// 제네릭 타입 제한 2 (extends 이용)
+interface LengthType {
+    length: number;
+}
+
+function logLength<T extends LengthType>(something: T): T {
+    console.log(something.length);
+    return something;
+}
+
+logLength("abc");
+logLength([1, 2, 3, 4, 5]);
+logLength({ length: 10 });
+
+// 제네릭 타입 제한 3 (keyof 이용)
+interface ShoppingItem {
+    name: string;
+    price: number;
+    stock: number;
+}
+
+function getShoppingItemOption<T extends keyof ShoppingItem>(item: T): T{
+    console.log(item);
+    return item;
+}
+
+getShoppingItemOption("name");
+getShoppingItemOption("price");
